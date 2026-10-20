@@ -1,0 +1,20 @@
+# AWS profile: MySQL on Amazon RDS + documents in Amazon S3.
+# Activate with: SPRING_PROFILES_ACTIVE=aws   (all secrets come from environment variables)
+spring:
+  datasource:
+    url: ${DB_URL}              # e.g. jdbc:mysql://<rds-endpoint>:3306/claimsdb
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update          # use "validate" + database/schema.sql once the schema is stable
+
+app:
+  admin:
+    email: ${ADMIN_EMAIL}       # no defaults in AWS: you must set a real admin password
+    password: ${ADMIN_PASSWORD}
+  seed-demo-data: false
+  aws:
+    region: ${AWS_REGION:ap-south-1}
+  storage:
+    s3-bucket: ${S3_BUCKET}

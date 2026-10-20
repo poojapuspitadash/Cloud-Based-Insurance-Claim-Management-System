@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claim Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-primary mb-4">
+  <div class="container">
+    <span class="navbar-brand mb-0 h1">&#9729; Cloud Claim Management</span>
+    <div id="navUser" class="text-white d-none">
+      <span id="whoami" class="me-3"></span>
+      <button class="btn btn-sm btn-light" id="logoutBtn">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div id="alertBox"></div>
+
+  <!-- LOGIN / REGISTER -->
+  <section id="authView" class="row justify-content-center">
+    <div class="col-md-5">
+      <ul class="nav nav-tabs mb-3">
+        <li class="nav-item"><button class="nav-link active" data-tab="login">Login</button></li>
+        <li class="nav-item"><button class="nav-link" data-tab="register">Register</button></li>
+      </ul>
+      <form id="loginForm" class="card card-body">
+        <label class="form-label">Email</label>
+        <input class="form-control mb-3" type="email" id="loginEmail" required>
+        <label class="form-label">Password</label>
+        <input class="form-control mb-3" type="password" id="loginPassword" required>
+        <button class="btn btn-primary">Login</button>
+        <small class="text-muted mt-3">Local demo: rahul@example.com / Customer@123 &middot; employee@claims.com / Employee@123</small>
+      </form>
+      <form id="registerForm" class="card card-body d-none">
+        <label class="form-label">Full name</label>
+        <input class="form-control mb-3" id="regName" required>
+        <label class="form-label">Email</label>
+        <input class="form-control mb-3" type="email" id="regEmail" required>
+        <label class="form-label">Policy number</label>
+        <input class="form-control mb-3" id="regPolicy" placeholder="POL1001" required>
+        <label class="form-label">Password (min 8 chars)</label>
+        <input class="form-control mb-3" type="password" id="regPassword" minlength="8" required>
+        <button class="btn btn-success">Create account</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CUSTOMER -->
+  <section id="customerView" class="d-none">
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <form id="claimForm" class="card card-body">
+          <h5>Submit a new claim</h5>
+          <label class="form-label">Claim type</label>
+          <select class="form-select mb-2" id="cType">
+            <option>Accident</option><option>Vehicle Damage</option><option>Theft</option>
+            <option>Fire</option><option>Medical / Injury</option><option>Other</option>
+          </select>
+          <label class="form-label">Incident date</label>
+          <input type="date" class="form-control mb-2" id="cDate" required>
+          <label class="form-label">Claim amount (&#8377;)</label>
+          <input type="number" min="1" step="0.01" class="form-control mb-2" id="cAmount" required>
+          <label class="form-label">What happened?</label>
+          <textarea class="form-control mb-2" rows="4" maxlength="2000" id="cDesc" required></textarea>
+          <label class="form-label">Supporting documents (PDF/JPG/PNG, max 5 MB each)</label>
+          <input type="file" class="form-control mb-3" id="cFiles" multiple accept=".pdf,.jpg,.jpeg,.png">
+          <button class="btn btn-primary">Submit claim</button>
+        </form>
+      </div>
+      <div class="col-lg-8">
+        <h5>My claims</h5>
+        <div id="myClaims"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMPLOYEE -->
+  <section id="employeeView" class="d-none">
+    <div id="stats" class="row mb-3"></div>
+    <div class="row g-2 mb-3">
+      <div class="col-md-6"><input id="searchBox" class="form-control" placeholder="Search by claim no., customer or policy"></div>
+      <div class="col-md-3">
+        <select id="statusFilter" class="form-select">
+          <option value="">All statuses</option><option>SUBMITTED</option><option>UNDER_REVIEW</option>
+          <option>APPROVED</option><option>REJECTED</option>
+        </select>
+      </div>
+      <div class="col-md-3"><button class="btn btn-outline-primary w-100" id="refreshBtn">Refresh</button></div>
+    </div>
+    <div id="allClaims"></div>
+  </section>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

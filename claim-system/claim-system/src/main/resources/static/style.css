@@ -1,0 +1,7 @@
+.claim-card { border-left: 5px solid #adb5bd; }
+.claim-card.HIGH { border-left-color: #dc3545; }
+.claim-card.MEDIUM { border-left-color: #ffc107; }
+.claim-card.LOW { border-left-color: #198754; }
+.nav-link { cursor: pointer; }
+.stat-box { text-align: center; padding: .75rem; border-radius: .5rem; background: #f1f3f5; }
+.stat-box strong { display: block; font-size: 1.5rem; }
